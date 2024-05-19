@@ -19,4 +19,4 @@ COPY --from=build-env /App/out .
 EXPOSE 8080
 
 # Specify the entry point for the application
-ENTRYPOINT ["dotnet", "YourProject.dll"]
+ENTRYPOINT ["dotnet", "jobs.dll"]
