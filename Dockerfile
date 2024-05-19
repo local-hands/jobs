@@ -2,12 +2,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /App
 
-# Copy the .csproj file and restore dependencies
-COPY *.csproj ./
+# Copy the solution file and restore dependencies
+COPY jobs/jobs.sln ./
+COPY jobs/jobs.csproj jobs/
 RUN dotnet restore
 
 # Copy the rest of the application and build
-COPY . ./
+COPY jobs/ jobs/
 RUN dotnet publish -c Release -o out
 
 # Use the ASP.NET runtime image

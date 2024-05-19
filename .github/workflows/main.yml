@@ -1,4 +1,4 @@
-name: main
+name: CI/CD Pipeline
 
 on:
   push:
@@ -11,23 +11,27 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Updated to v3
+      uses: actions/checkout@v3  # Updated to v3
 
     - name: Set up .NET
-      uses: actions/setup-dotnet@v2  # Updated to v3
+      uses: actions/setup-dotnet@v3  # Updated to v3
       with:
         dotnet-version: '8.0.x'
 
+    - name: Ensure build directory permissions
+      run: |
+        sudo chmod -R 777 /home/runner/work/jobs/jobs
+
     - name: Build and publish .NET app
       run: |
-        dotnet restore
-        dotnet publish -c Release
+        dotnet restore ./jobs/jobs.sln
+        dotnet publish ./jobs/jobs.sln -c Release -o ./out
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1  # Updated to v2
+      uses: docker/setup-buildx-action@v2  # Updated to v2
 
     - name: Log in to ACR
-      uses: azure/docker-login@v1  # Updated to v2
+      uses: azure/docker-login@v1  # Updated to v1
       with:
         login-server: ${{ secrets.ACR_LOGIN_SERVER }}
         username: ${{ secrets.ACR_USERNAME }}
@@ -39,7 +43,7 @@ jobs:
         docker push ${{ secrets.ACR_LOGIN_SERVER }}/localhandsv1:${{ github.sha }}
 
     - name: Azure CLI login
-      uses: azure/login@v1  # Updated to v2
+      uses: azure/login@v2  # Updated to v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
