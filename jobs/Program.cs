@@ -19,7 +19,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () =>
 {
-    return "Hello, Klopp!";
+    return "Jurgen Klopp - From Doubters to Believers!";
 });
 
 app.Run();
