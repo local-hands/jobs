@@ -7,7 +7,7 @@ COPY jobs/jobs.sln ./
 COPY jobs/jobs.csproj ./jobs/
 
 # Restore dependencies
-RUN dotnet restore jobs/jobs.sln
+RUN dotnet restore jobs.sln
 
 # Copy the rest of the application and build
 COPY jobs/ ./jobs/
