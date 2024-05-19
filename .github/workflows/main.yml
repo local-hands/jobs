@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow
+      - dev-itn1  # Change this to the branch you want to trigger the workflow
 
 jobs:
   build:
