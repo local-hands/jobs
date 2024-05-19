@@ -19,7 +19,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () =>
 {
-    return "Hello, World!";
+    return "Hello, Klopp!";
 });
 
 app.Run();
