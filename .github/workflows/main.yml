@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: main
 
 on:
   push:
@@ -25,13 +25,13 @@ jobs:
     - name: Build and publish .NET app
       run: |
         dotnet restore ./jobs/jobs.sln
-        dotnet publish ./jobs/jobs.sln -c Release -o ./out
+        dotnet publish ./jobs/jobs.csproj -c Release -o ./out
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2  # Updated to v2
 
     - name: Log in to ACR
-      uses: azure/docker-login@v1  # Updated to v1
+      uses: azure/docker-login@v1  # Updated to v2
       with:
         login-server: ${{ secrets.ACR_LOGIN_SERVER }}
         username: ${{ secrets.ACR_USERNAME }}
