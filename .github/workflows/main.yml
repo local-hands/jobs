@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - dev-itn1  # Change this to the branch you want to trigger the workflow
+      - main  # Change this to the branch you want to trigger the workflow
 
 jobs:
   build-and-deploy:
