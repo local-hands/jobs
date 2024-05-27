@@ -1,13 +1,27 @@
+using localhands.Jobs.ServiceProvider;
+using localhands.Jobs.ServiceProvider.Interface;
+using localhands.Jobs.RequestHandler;
+using localhands.Jobs.Endpoints;
+using localhands.Jobs.Mappers;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add services to the container
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<DbServiceProvider>();
+builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddScoped<JobRequestHandler>();
+
+// AutoMapper Configuration
+builder.Services.AddAutoMapper(typeof(JobProfile));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -16,10 +30,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 
-app.MapGet("/", () =>
-{
-    return "Jurgen Klopp - From Doubters to Believers!";
-});
+// app.MapGet("/", () =>
+// {
+//     return "Jurgen Klopp - From Doubters to Believers!";
+// });
+
+app.MapJobEndpoints();
 
 app.Run();
