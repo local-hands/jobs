@@ -11,11 +11,11 @@ namespace localhands.Jobs.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public JobCategory Category { get; set; }
+        // public JobCategory Category { get; set; }
         public DateTime DatePosted { get; set; }
         public bool IsFilled { get; set; }
         public decimal Price { get; set; }
-        public JobPoster Poster { get; set; }
+        public required string Zipcode { get; set; }
     }
 
     public class JobCategory
@@ -25,6 +25,7 @@ namespace localhands.Jobs.Models
         public string Id { get; set; } = string.Empty;
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public List<string>? Skills { get; set; } 
     }
 
      public class JobPoster

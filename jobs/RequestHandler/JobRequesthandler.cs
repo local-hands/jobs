@@ -19,10 +19,16 @@ namespace localhands.Jobs.RequestHandler
         }
 
 
-        public async Task<IResult> AddJobAsync(JobCategoryDto jobDto)
+        public async Task<IResult> AddJobCategoryAsync(JobCategoryDto jobDto)
+        {
+            await _jobService.AddJobCategoryAsync(jobDto);
+            return Results.Created($"/jobs/{jobDto.Name}", jobDto);
+        }
+
+        public async Task<IResult> AddJobAsync(JobDto jobDto)
         {
             await _jobService.AddJobAsync(jobDto);
-            return Results.Created($"/jobs/{jobDto.Name}", jobDto);
+            return Results.Created($"/jobs/{jobDto.Title}", jobDto);
         }
     }
 }

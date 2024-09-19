@@ -7,7 +7,8 @@ namespace localhands.Jobs.ServiceProvider.Interface{
     public interface IJobsServiceProvider
     {
         Task<IEnumerable<JobCategoryDto>> GetJobsAsync();
-        Task AddJobAsync(JobCategoryDto jobDto);
+        Task AddJobAsync(JobDto jobDto);
+        Task AddJobCategoryAsync(JobCategoryDto jobDto);
     }
 
 

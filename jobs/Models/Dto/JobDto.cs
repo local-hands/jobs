@@ -1,3 +1,5 @@
+using localhands.Jobs.Models;
+
 namespace localhands.Jobs.DTOs
 {
     public class JobDto
@@ -5,9 +7,11 @@ namespace localhands.Jobs.DTOs
         public string Id { get; set; }  = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; }  = string.Empty;
-        public string JobCategoryDto { get; set; }  = string.Empty;
+        public DateTime DatePosted { get; set; } = DateTime.Now;
+        // public JobCategoryDto Category { get; set; } = new JobCategoryDto();
         public decimal Price { get; set; } = 0;
-        public JobPosterDto Poster { get; set; } = new JobPosterDto();
+        public string Zipcode { get; set; }
 
     }
+
 }
