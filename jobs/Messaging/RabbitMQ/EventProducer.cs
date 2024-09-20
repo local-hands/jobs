@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.Json;
 using localhands.Jobs.Models;
 
+namespace localhands.Jobs.Messaging.RabbitMQ;
+
 public class JobProducer
 {
     private readonly string _hostname = "localhost";  // RabbitMQ host
@@ -21,6 +23,7 @@ public class JobProducer
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "", routingKey: _queueName, basicProperties: null, body: body);
+            Console.WriteLine("RabbitMQ Producer [x] Sent {0}", message);
         }
     }
 }

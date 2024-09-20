@@ -5,6 +5,7 @@ using localhands.Jobs.Endpoints;
 using localhands.Jobs.Mappers;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using localhands.Jobs.Messaging.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DbServiceProvider>();
 builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddScoped<JobProducer>();
 builder.Services.AddScoped<JobRequestHandler>();
 
 // AutoMapper Configuration
